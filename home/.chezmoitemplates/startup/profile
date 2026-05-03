@@ -1,0 +1,43 @@
+{{- if eq .os "darwin" }}
+# Add Visual Studio Code (code)
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+{{- end }}
+{{- if lookPath "code" }}
+export EDITOR='code --wait'
+{{- else }}
+export EDITOR='vi'
+{{- end }}
+
+{{ if eq .shell "zsh" }}
+# Initialize zsh completion
+autoload -U compinstall
+autoload -U compinit && compinit
+autoload -U bashcompinit && bashcompinit
+{{ end }}
+
+{{- if lookPath "brew" }}
+eval "$(/opt/homebrew/bin/brew shellenv)"
+{{- end }}
+{{- if lookPath "mise" }}
+eval "$(mise activate {{ .shell }})"
+{{- end }}
+{{- if lookPath "oh-my-posh" }}
+config="$(brew --prefix oh-my-posh)/themes/marcduiker.omp.json"
+eval "$(oh-my-posh init {{ .shell }} --config "$config")"
+{{- end }}
+{{- if lookPath "fzf" }}
+{{-   if eq .shell "zsh" }}
+source <(fzf --{{ .shell }})
+{{-   else if eq .shell "bash" }}
+eval "$(fzf --{{ .shell }})"
+{{-   end -}}
+{{- end }}
+{{- if lookPath "task" }}
+eval "$(task --completion {{ .shell }})"
+{{- end }}
+{{- if lookPath "navi" }}
+eval "$(navi widget {{ .shell }})"
+{{- end }}
+{{- if lookPath "zoxide" }}
+eval "$(zoxide init {{ .shell }})"
+{{- end }}

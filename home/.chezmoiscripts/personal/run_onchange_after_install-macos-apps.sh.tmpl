@@ -1,0 +1,90 @@
+#!/bin/bash
+
+set -e
+
+APPS=/Applications
+BIN="$HOME/.local/bin"
+SCRATCH="${XDG_DATA_HOME:=$HOME/.local/share}"
+
+is_installed() {
+    if command -v "$1" > /dev/null 2>&1; then
+        true
+        return 0
+    fi
+    false
+}
+
+# Install VS Code
+
+install_vscode() {
+    local name
+    local url
+    local vol
+    local dmg
+
+    name="Visual Studio Code"
+    vol="VS Code"
+    url="https://code.visualstudio.com/sha/download?build=stable&os={{ .os }}-{{ .arch }}-dmg"
+    dmg="$SCRATCH/$name.dmg"
+
+    curl -fSL -o "$dmg" "$url"
+    
+    hdiutil attach "$dmg"
+    cp -rf "/Volumes/$vol/$name.app" $APPS
+    
+    hdiutil detach "/Volumes/$vol"
+    rm -f "$dmg"
+}
+
+if ! is_installed code; then
+    echo "Visual Studio Code not found. Installing."
+    install_vscode
+fi
+
+# Install VS Code extensions
+
+if ! is_installed code; then
+    echo "Visual Studio Code not found. Aborting."
+    exit 1
+fi
+
+EXTS="$(code --list-extensions)"
+
+install_vscode_ext() {
+    local ext="$1"
+    if ! echo "$EXTS" | grep -q $ext; then
+        code --force --install-extension $ext
+    fi
+}
+
+{{ range .vscode.app.extensions -}}
+install_vscode_ext {{ . }}
+{{ end -}}
+
+# Install Fiji/ImageJ
+
+install_fiji() {
+    local launcher
+    local url
+    local zip
+
+    url="https://downloads.imagej.net/fiji/latest/fiji-latest-{{ .os }}-{{ .arch }}-jdk.zip"
+    zip="$(basename $url)"
+
+    cd "$SCRATCH"
+    curl -fSL -o "$zip" "$url"
+    unzip -tq "$zip"
+    unzip "$zip"
+    
+    cd "$BIN"
+    launcher="Fiji.app/Contents/MacOS/fiji-{{ .os }}-{{ .arch }}"
+    ln -s "$SCRATCH/Fiji/$launcher" fiji
+
+    cd $APPS
+    ln -s "$SCRATCH/Fiji/Fiji.app" Fiji.app
+}
+
+if ! is_installed "$BIN/fiji"; then
+    echo "Fiji/ImageJ not found. Installing."
+    install_fiji
+fi

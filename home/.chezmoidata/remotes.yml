@@ -1,0 +1,42 @@
+remotes:
+  mpcdf:
+    user: thosi
+    domain: .mpcdf.mpg.de
+    hosts:
+    - gate
+    - gate1
+    - gate2
+    - raven
+    - raven01i
+    - raven02i
+    - raven03i
+    - raven04i
+    - viper
+    - viper01i
+    - viper02i
+    - viper03i
+    - viper04i
+  mpiib:
+    user: silvers
+    domain: .in.mpiib-berlin.mpg.de
+    hosts:
+    - bohemianrhapsody
+    - elcattivo
+    - folsomprisonblues
+    - geniux
+    - godsavethequeen
+    - holidayincambodia
+    - likearollingstone
+    - sympathyforthedevil
+  mpimg:
+    user: silvers
+    domain: .molgen.mpg.de
+    hosts:
+    - bohemianrhapsody
+    - elcattivo
+    - folsomprisonblues
+    - geniux
+    - godsavethequeen
+    - holidayincambodia
+    - likearollingstone
+    - sympathyforthedevil

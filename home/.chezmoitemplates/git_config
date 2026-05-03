@@ -1,0 +1,7 @@
+[user]
+	name = {{ .name }}
+	email = {{ .email | quote }}
+[init]
+	defaultBranch = main
+[http]
+	postBuffer = 524288000

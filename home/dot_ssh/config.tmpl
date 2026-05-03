@@ -1,0 +1,14 @@
+Host *
+    ControlMaster auto
+    ControlPath ~/.ssh/control-%h-%p-%r
+    ControlPersist yes
+    LogLevel ERROR
+    Port 22
+    StrictHostKeyChecking ask
+    UserKnownHostsFile {{ .accounts.known_hosts }}
+    AddKeysToAgent yes
+    UseKeychain yes
+{{ template "ssh/github" .accounts.github }}
+{{ template "ssh/mpiib" .accounts.mpiib.remotes }}
+{{ template "ssh/mpcdf" .accounts.mpcdf.remotes }}
+{{ template "ssh/mpimg" .accounts.mpimg.remotes }}

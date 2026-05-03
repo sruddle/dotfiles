@@ -1,0 +1,35 @@
+.gitignore
+README.md
+Taskfile.yml
+taskfiles
+
+krb5.conf
+
+{{ if ne .shell "zsh" }}
+.zprofile
+.zshrc
+{{ end }}
+
+{{ if ne .shell "bash" }}
+.bashprofile
+.bashrc
+{{ end }}
+
+{{ if ne .chezmoi.os "darwin" }}
+.gitconfig
+{{ end }}
+
+{{ if ne .chezmoi.os "linux" }}
+.bashprofile
+.bashrc
+.config/git
+{{ end }}
+
+{{ if ne .owner "personal" }}
+.config/homebrew
+.chezmoiscripts/personal/**
+{{ end }}
+
+{{ if ne .owner "mpcdf" }}
+.chezmoiscripts/mpcdf/**
+{{ end }}

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if sudo test -f {{ .accounts.mpcdf.remotes.krbconf | quote }}; then
+    echo "exit 0"
+else
+    sudo cp {{ joinPath .chezmoi.sourceDir "krb5.conf" | quote }} {{ .accounts.mpcdf.remotes.krbconf | quote }}
+fi

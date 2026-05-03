@@ -1,0 +1,5 @@
+[{{ .rclone_name }}]
+type = drive
+scope = drive
+token = {"access_token":{{ .access_token | quote }},"token_type":"Bearer","refresh_token":{{ .refresh_token | quote }},"expiry":{{ .token_expiry | quote }}}
+team_drive = 

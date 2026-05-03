@@ -1,0 +1,89 @@
+{{/* boolean feature tags */}}
+{{- $havesudo := false -}}
+{{- $headless := true -}}
+
+{{/* machine info */}}
+{{- $arch := output "uname" "-m" | trim -}}
+{{- $os := .chezmoi.os -}}
+{{- $owner := "personal" -}}
+{{- $shell := env "SHELL" | base -}}
+
+{{- $hostname := .chezmoi.hostname | lower -}}
+{{- if eq .chezmoi.os "darwin" -}}
+{{-   $hostname := output "scutil" "--get" "LocalHostName" | trim | lower -}}
+{{-   $headless := false -}}
+{{-   $havesudo := true -}}
+{{- end -}}
+{{- if hasPrefix $hostname "raven" -}}
+{{-   $hostname := "raven" -}}
+{{-   $owner := "mpcdf" -}}
+{{- else if hasPrefix $hostname "viper" -}}
+{{-   $hostname := "viper" -}}
+{{-   $owner := "mpcdf" -}}
+{{- else if eq $hostname "logan-1" "meerkatze" -}}
+{{-   $havesudo := true -}}
+{{-   $owner := "mpiib" -}}
+{{- else if eq $hostname "geniux" "bohemianrhapsody" "likearollingstone" "godsavethequeen" "sympathyforthedevil" "folsomprisonblues" "elcattivo" "holidayincambodia" -}}
+{{-   $owner := "mpimg" -}}
+{{- end -}}
+
+[data]
+	arch = {{ $arch | quote }}
+	havesudo = {{ $havesudo }}
+	headless = {{ $headless }}
+	hostname = {{ $hostname | quote }}
+	owner = {{ $owner | quote }}
+	os = {{ $os | quote }}
+	shell = {{ $shell | quote }}
+
+[data.accounts]
+	known_hosts = "~/.ssh/known_hosts"
+
+[data.accounts.git]
+	name = "t-silvers"
+	email = "thomas.silvers@me.com"
+
+[data.accounts.github]
+	username = "t-silvers"
+	identityfile = "~/.ssh/github.pem"
+	token = {{ keyring "github.token" "t-silvers" | quote }}	
+
+[data.accounts.mpiib]
+	username = "silvers"
+	password = {{ keyring "mpiib" "silvers" | quote }}
+
+[data.accounts.mpiib.remotes]
+	username = "silvers"
+	identityfile = "~/.ssh/mpiib.pem"
+
+[data.accounts.mpiib.nextcloud]
+	rclone_name = "mpiib_nextcloud"
+	vendor = "nextcloud"
+	username = "silvers"
+	password = {{ keyring "mpiib" "silvers" | quote }}
+	domain = "transfer.mpiib-berlin.mpg.de"
+	webdav_url = "https://transfer.mpiib-berlin.mpg.de/remote.php/dav/files/63595F6C-C750-4D11-B19C-4D850BB5C0B1"
+	rclone_pass = {{ keyring "mpiib_nextcloud_rclone" "silvers" | quote }}
+
+[data.accounts.mpcdf]
+	username = "thosi"
+	password = {{ keyring "mpcdf" "thosi" | quote }}
+
+[data.accounts.mpcdf.remotes]
+	username = "thosi"
+	password = "thosi"
+	identityfile = "~/.ssh/mpiib.pem"
+	krbconf = "/etc/krb5.conf"
+
+[data.accounts.mpimg]
+	username = "silvers"
+
+[data.accounts.mpimg.remotes]
+	username = "silvers"
+	identityfile = "~/.ssh/id_rsa"
+
+[data.accounts.mpimg.gdrive]
+	rclone_name = "mpimg_gdrive"
+	access_token = {{ keyring "mpimg_gdrive_rclone_access_token" "silvers" | quote }}
+	refresh_token = {{ keyring "mpimg_gdrive_rclone_refresh_token" "silvers" | quote }}
+	token_expiry = "2023-12-11T20:38:25.809113+01:00"

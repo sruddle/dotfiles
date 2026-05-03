@@ -1,0 +1,27 @@
+.*
+!.gitattributes
+!.github
+!.gitignore
+!.keep
+!.pre-commit-config.yaml
+!.pre-commit-hooks.yaml
+!.yamllint
+
+!.chezmoi*
+chezmoi.toml
+
+Applications
+Desktop
+# Developer
+Documents
+Downloads
+Library
+Movies
+Music
+Pictures
+Public
+# Taskfile.yml
+Tasks
+
+.config/htop
+.ssh

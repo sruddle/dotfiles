@@ -1,0 +1,6 @@
+[{{ .rclone_name }}]
+type = webdav
+url = {{ .webdav_url }}
+vendor = {{ .vendor }}
+user = {{ .username }}
+pass = {{ .rclone_pass }}
