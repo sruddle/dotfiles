@@ -8,7 +8,7 @@ colima = 'latest'
 docker-cli = 'latest'
 duckdb = 'latest'
 fzf = 'latest'
-github-cli = 'latest'
+github-cli = { version = "latest", os = ["linux"] }
 go = ['1.21']
 gomplate = 'latest'
 hyperfine = 'latest'
