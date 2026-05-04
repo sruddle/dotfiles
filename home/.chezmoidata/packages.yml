@@ -1,14 +1,4 @@
 deploys:
-  macbook-air-m2:
-    packages:
-      brews:
-      - name: mise
-      casks:
-      - name: chromedriver
-      - name: firefox
-      - name: font-meslo-lg-nerd-font
-      - name: xquartz
-
   padme:
     packages:
       brews:
