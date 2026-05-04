@@ -55,8 +55,7 @@ else
 	exit 1
 fi
 
-# ${chezmoi} init --apply "t-silvers"
-${chezmoi} init --apply git@github.com:t-silvers/dotfiles.git
+${chezmoi} init --apply sruddle
 
 shell="$(awk -F : "\$1 == \"${username}\" { print \$7 }" /etc/passwd)"
 exec "${shell}"
