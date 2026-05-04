@@ -1,6 +1,6 @@
 remotes:
   mpcdf:
-    user: thosi
+    user: ruddles
     domain: .mpcdf.mpg.de
     hosts:
     - gate
@@ -16,27 +16,3 @@ remotes:
     - viper02i
     - viper03i
     - viper04i
-  mpiib:
-    user: silvers
-    domain: .in.mpiib-berlin.mpg.de
-    hosts:
-    - bohemianrhapsody
-    - elcattivo
-    - folsomprisonblues
-    - geniux
-    - godsavethequeen
-    - holidayincambodia
-    - likearollingstone
-    - sympathyforthedevil
-  mpimg:
-    user: silvers
-    domain: .molgen.mpg.de
-    hosts:
-    - bohemianrhapsody
-    - elcattivo
-    - folsomprisonblues
-    - geniux
-    - godsavethequeen
-    - holidayincambodia
-    - likearollingstone
-    - sympathyforthedevil
