@@ -84,7 +84,8 @@ install_fiji() {
     ln -s "$SCRATCH/Fiji/Fiji.app" Fiji.app
 }
 
-if ! is_installed "$BIN/fiji"; then
+# Use `fiji` location from GUI installer
+if ! is_installed "$APP/Fiji/fiji"; then
     echo "Fiji/ImageJ not found. Installing."
     install_fiji
 fi
