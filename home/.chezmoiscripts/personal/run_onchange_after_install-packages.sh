@@ -16,14 +16,15 @@ if ! is_installed brew; then
 fi
 
 brew install mise
+brew install gh
 brew install jandedobbeleer/oh-my-posh
 brew install --cask chromedriver
 brew install --cask firefox
 brew install --cask font-meslo-lg-nerd-font
-brew install --cask xquartz
 brew install --cask iterm2
 brew install --cask notion
 brew install --cask visual-studio-code
+brew install --cask xquartz
 
 if ! is_installed rclone; then
     echo "rclone not found. Installing."
